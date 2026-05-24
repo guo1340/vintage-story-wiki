@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vintagestory.gamewikihub.com/sitemap.xml
+Sitemap: https://vintage-story.gamewikihub.com/sitemap.xml
