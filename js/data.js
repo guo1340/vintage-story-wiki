@@ -2,7 +2,7 @@ window.WikiData = {
   site: {
     name: 'Vintage Story Wiki',
     shortName: 'Vintage Story Wiki',
-    baseUrl: 'https://vintagestory.gamewikihub.com',
+    baseUrl: 'https://vintage-story.gamewikihub.com',
     titleSuffix: 'Vintage Story Wiki',
     defaultDescription: 'A practical Vintage Story survival handbook for crafting, farming, smithing, prospecting, temporal storms, creatures, world generation and mods.',
     defaultOgImage: '/assets/images/hero/homepage-hero.svg',

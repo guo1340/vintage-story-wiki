@@ -41,7 +41,7 @@ global.document = {
 global.localStorage = { getItem: () => null, setItem() {}, removeItem() {} };
 global.history = { pushState() {} };
 let CURRENT = '/';
-global.location = { get pathname() { return CURRENT; }, origin: 'https://vintagestory.gamewikihub.com' };
+global.location = { get pathname() { return CURRENT; }, origin: 'https://vintage-story.gamewikihub.com' };
 global.window = { addEventListener() {}, scrollTo() {}, adsbygoogle: [] };
 global.URL = URL;
 global.setTimeout = () => {};
