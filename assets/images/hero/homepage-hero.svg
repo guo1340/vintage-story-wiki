@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Vintage Story wilderness survival handbook scene">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#29352f"/>
+      <stop offset=".5" stop-color="#5f6f52"/>
+      <stop offset="1" stop-color="#2b1d14"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd27a"/>
+      <stop offset=".45" stop-color="#c66a2b"/>
+      <stop offset="1" stop-color="#5a2414"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .16"/>
+      </feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1170" cy="145" r="78" fill="#efe7d3" opacity=".55"/>
+  <path d="M0 410c180-120 340-150 520-80 150 60 260 50 420-20 220-95 420-65 660 65v525H0z" fill="#364d32"/>
+  <path d="M0 510c210-100 390-118 590-42 210 80 390 60 610-25 160-62 280-45 400 18v439H0z" fill="#2b1d14" opacity=".82"/>
+  <g fill="#18241b">
+    <path d="M90 590l54-190 54 190h-38l55 132H73l55-132z"/>
+    <path d="M230 590l62-230 62 230h-42l58 150H214l58-150z"/>
+    <path d="M1320 610l60-220 60 220h-42l58 142h-152l58-142z"/>
+    <path d="M1460 590l48-180 48 180h-33l48 120h-126l48-120z"/>
+  </g>
+  <g transform="translate(895 352)">
+    <rect x="0" y="112" width="210" height="128" fill="#3b2a1e"/>
+    <path d="M-20 125L105 34l125 91z" fill="#5a3b25"/>
+    <rect x="22" y="152" width="52" height="88" fill="#201711"/>
+    <rect x="116" y="150" width="55" height="42" fill="#d8c6a5" opacity=".55"/>
+    <rect x="171" y="58" width="24" height="76" fill="#3b2a1e"/>
+    <path d="M166 58h34l-10-34h-14z" fill="#232323"/>
+  </g>
+  <g transform="translate(682 380)" stroke="#d8c6a5" stroke-width="10" stroke-linecap="round">
+    <line x1="0" y1="100" x2="0" y2="0"/>
+    <line x1="-90" y1="100" x2="90" y2="100"/>
+    <line x1="0" y1="0" x2="-70" y2="50"/>
+    <line x1="0" y1="0" x2="70" y2="50"/>
+    <line x1="0" y1="0" x2="-30" y2="-70"/>
+    <line x1="0" y1="0" x2="30" y2="70"/>
+    <circle cx="0" cy="0" r="12" fill="#b87333" stroke="none"/>
+  </g>
+  <g transform="translate(420 615)">
+    <ellipse cx="0" cy="92" rx="130" ry="35" fill="#120c08" opacity=".55"/>
+    <path d="M-70 82c28-34 42-70 28-116 46 36 72 70 62 116z" fill="url(#fire)"/>
+    <path d="M-10 82c42-42 48-84 22-142 62 44 92 88 76 142z" fill="url(#fire)" opacity=".85"/>
+    <rect x="-105" y="85" width="220" height="18" rx="9" fill="#5a3b25" transform="rotate(8)"/>
+    <rect x="-110" y="88" width="220" height="18" rx="9" fill="#3b2a1e" transform="rotate(-12)"/>
+  </g>
+  <g transform="translate(1040 655)" fill="#4f4f4f">
+    <path d="M0 36h210c-18 42-64 62-132 62H40z"/>
+    <rect x="52" y="0" width="84" height="38" rx="4"/>
+    <rect x="80" y="85" width="48" height="34"/>
+  </g>
+  <path d="M0 790c260-70 570-74 850-24 250 45 500 32 750-20v154H0z" fill="#1b120d"/>
+  <rect width="1600" height="900" filter="url(#grain)" opacity=".45"/>
+</svg>

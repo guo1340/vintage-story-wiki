@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vintagestory.gamewikihub.com/sitemap.xml
