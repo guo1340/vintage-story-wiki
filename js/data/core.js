@@ -10,7 +10,7 @@
     "titleSuffix": "Vintage Story Wiki",
     "defaultDescription": "A practical Vintage Story survival handbook for crafting, farming, smithing, prospecting, temporal storms, creatures, world generation and mods.",
     "defaultOgImage": "/assets/images/hero/homepage-hero.svg",
-    "lastUpdated": "2026-05-24",
+    "lastUpdated": "2026-06-02",
     "buildStatus": "Current general survival guidance; verify exact numbers against your game version."
   },
   "sourceRegistry": {
