@@ -40,36 +40,7 @@
     ></script>
   </head>
   <body>
-    <header class="site">
-      <a class="logo" href="/">
-        <span class="logo-mark">VS</span>
-        <span class="logo-text"
-          >VINTAGE STORY<small>unofficial survival handbook</small></span
-        >
-      </a>
-      <div class="search">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search smithing, crops, ores, storms..."
-          autocomplete="off"
-          aria-label="Search the wiki"
-        />
-        <div class="search-results" id="searchResults"></div>
-      </div>
-      <nav class="top" aria-label="Primary">
-        <a href="/getting-started">Getting Started</a>
-        <a href="/survival">Survival</a>
-        <a href="/crafting">Crafting</a>
-        <a href="/farming">Farming</a>
-        <a href="/smithing">Smithing</a>
-        <a href="/exploration">Exploration</a>
-        <a href="/mods">Mods</a>
-      </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-        Menu
-      </button>
-    </header>
+    <header class="site" id="siteHeader"></header>
 
     <div class="notice-bar" aria-hidden="true">
       <span
@@ -83,47 +54,18 @@
     </div>
 
     <div class="layout">
-      <aside class="left" id="leftNav"><div class="journal-title">Field Journal</div><a class="journal-row" href="/getting-started" data-r="/getting-started"><span>Stone</span><b>Getting Started</b></a><a class="journal-row" href="/survival" data-r="/survival"><span>Copper</span><b>Survival</b></a><a class="journal-row" href="/crafting" data-r="/crafting"><span>Bronze</span><b>Crafting</b></a><a class="journal-row" href="/farming" data-r="/farming"><span>Iron</span><b>Farming</b></a><a class="journal-row" href="/smithing" data-r="/smithing"><span>Steel</span><b>Smithing</b></a><a class="journal-row" href="/exploration" data-r="/exploration"><span>Stone</span><b>Exploration</b></a><a class="journal-row" href="/creatures" data-r="/creatures"><span>Copper</span><b>Creatures</b></a><a class="journal-row" href="/building" data-r="/building"><span>Bronze</span><b>Building</b></a><a class="journal-row" href="/world-generation" data-r="/world-generation"><span>Iron</span><b>World Generation</b></a><a class="journal-row" href="/guides" data-r="/guides"><span>Steel</span><b>Guides</b></a><a class="journal-row" href="/updates" data-r="/updates"><span>Stone</span><b>Updates</b></a><a class="journal-row" href="/mods" data-r="/mods"><span>Copper</span><b>Mods</b></a><div class="journal-title small">Camp Records</div><a class="journal-row" href="/about" data-r="/about"><b>About</b></a><a class="journal-row" href="/privacy-policy" data-r="/privacy-policy"><b>Privacy Policy</b></a><a class="journal-row" href="/contact" data-r="/contact"><b>Contact</b></a></aside>
+      <aside class="left" id="leftNav"></aside>
       <main id="main"><div class="ad-slot ad-banner" role="complementary" aria-label="Advertisement"><span class="ad-label">Notice Board</span><ins class="adsbygoogle" style="display:block;width:100%;height:90px;" data-ad-client="ca-pub-1319817671788428" data-ad-slot="6141169453"  data-full-width-responsive="true"></ins></div><section class="category-ledger"><span class="kicker">Field section</span><h1>Getting Started</h1><p>First-day priorities, beginner mistakes, early ages and survival order.</p></section><section class="manual-grid wide"><a class="manual-card" href="/getting-started/first-day-guide"><span class="stamp">GET-01</span><h3>First Day Guide</h3><p>Your first day should create momentum: tools, food, fire, shelter, map notes, and a plan for tomorrow.</p><small>Gather stones and sticks / Knapping comes first</small></a><a class="manual-card" href="/getting-started/beginner-mistakes"><span class="stamp">GET-02</span><h3>Common Beginner Mistakes</h3><p>Most beginner failures come from treating Vintage Story like a fast survival game instead of a seasonal planning game.</p><small>Plant too late / Store food badly</small></a><a class="manual-card" href="/getting-started/early-game-progression"><span class="stamp">GET-03</span><h3>Early Game Progression</h3><p>Move from stone to copper, bronze, iron and steel with deliberate resource goals.</p><small>Stone age tools / Copper prospecting</small></a><a class="manual-card" href="/getting-started/survival-priorities"><span class="stamp">GET-04</span><h3>Survival Priorities</h3><p>Food, shelter, tools, storage, farming, smithing and winter stores come in that order.</p><small>Food before ambition / Shelter before nightfall</small></a></section><div class="ad-slot ad-in-article" role="complementary" aria-label="Advertisement"><span class="ad-label">Notice Board</span><ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-1319817671788428" data-ad-slot="6141169453" data-ad-format="auto" data-full-width-responsive="true"></ins></div></main>
-      <aside class="right" id="rightNav"><div class="journal-title">Survival Almanac</div><a class="field-link" href="/getting-started/first-day-guide"><b>First Day Guide</b></a><a class="field-link" href="/exploration/prospecting"><b>Prospecting</b></a><a class="field-link" href="/smithing/steel-production"><b>Steel Production</b></a><a class="field-link" href="/farming/food-preservation"><b>Food Preservation</b></a><a class="field-link" href="/guides/survive-winter"><b>Survive Winter</b></a><a class="field-link" href="/mods/best-mods"><b>Best Mods</b></a><div class="season-card"><span>Season Note</span><p>Winter preparation starts while the weather still feels friendly.</p></div></aside>
+      <aside class="right" id="rightNav"></aside>
     </div>
 
-    <footer class="site">
-      <p class="footer-tagline">A survival archive for patient players.</p>
-      <nav class="footer-links" aria-label="External resources">
-        <a
-          href="https://www.vintagestory.at/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Official Site</a
-        >
-        <a
-          href="https://wiki.vintagestory.at/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Official Wiki</a
-        >
-        <a
-          href="https://mods.vintagestory.at/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Mod DB</a
-        >
-        <a href="/updates">Updates</a>
-      </nav>
-      <nav class="footer-links" aria-label="Site information">
-        <a href="/about">About</a>
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/contact">Contact</a>
-      </nav>
-      <p>
-        Unofficial fan wiki. Vintage Story is owned by Anego Studios.
-        GameWikiHub &copy; 2026.
-      </p>
-    </footer>
+    <footer class="site" id="siteFooter"></footer>
 
     <script src="/js/data.js"></script>
     <script src="/js/meta.js"></script>
+    <script src="/js/components/header.js"></script>
+    <script src="/js/components/sidebar.js"></script>
+    <script src="/js/components/footer.js"></script>
     <script src="/js/app.js"></script>
   </body>
 </html>

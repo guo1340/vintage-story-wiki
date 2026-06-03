@@ -1,11 +1,14 @@
 (function () {
   const D = window.WikiData;
+  const C = window.WikiComponents || {};
+  const siteHeader = document.getElementById('siteHeader');
+  const siteFooter = document.getElementById('siteFooter');
   const main = document.getElementById('main');
   const leftNav = document.getElementById('leftNav');
   const rightNav = document.getElementById('rightNav');
-  const searchInput = document.getElementById('searchInput');
-  const searchResults = document.getElementById('searchResults');
-  const menuToggle = document.getElementById('menuToggle');
+  let searchInput = document.getElementById('searchInput');
+  let searchResults = document.getElementById('searchResults');
+  let menuToggle = document.getElementById('menuToggle');
 
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const category = (id) => D.categories.find((c) => c.id === id);
@@ -88,16 +91,23 @@
       return true;
     }).slice(0, count);
   }
+  function renderChrome(active) {
+    if (siteHeader && C.renderHeader && !siteHeader.innerHTML.trim()) siteHeader.innerHTML = C.renderHeader(D);
+    if (siteFooter && C.renderFooter && !siteFooter.innerHTML.trim()) siteFooter.innerHTML = C.renderFooter(D);
+    searchInput = document.getElementById('searchInput');
+    searchResults = document.getElementById('searchResults');
+    menuToggle = document.getElementById('menuToggle');
+    renderLeftNav(active);
+    renderRightNav();
+  }
   function renderLeftNav(active) {
-    leftNav.innerHTML = `<div class="journal-title">Field Journal</div>${D.categories.map((c, i) => `<a class="journal-row" href="/${esc(c.id)}" data-r="/${esc(c.id)}"><span>${ageLabels[i % ageLabels.length]}</span><b>${esc(c.title)}</b></a>`).join('')}<div class="journal-title small">Camp Records</div><a class="journal-row" href="/about" data-r="/about"><b>About</b></a><a class="journal-row" href="/privacy-policy" data-r="/privacy-policy"><b>Privacy Policy</b></a><a class="journal-row" href="/contact" data-r="/contact"><b>Contact</b></a>`;
-    leftNav.querySelectorAll('a').forEach((a) => {
-      const r = a.getAttribute('data-r');
-      if (r && (active === r || active.startsWith(r + '/'))) a.classList.add('active');
-    });
+    if (!leftNav) return;
+    if (C.renderLeftSidebar && !leftNav.innerHTML.trim()) leftNav.innerHTML = C.renderLeftSidebar(D);
+    if (C.markActiveSidebar) C.markActiveSidebar(leftNav, active);
   }
   function renderRightNav() {
-    const tip = D.tips[Math.floor(Math.random() * D.tips.length)];
-    rightNav.innerHTML = `<div class="journal-title">Survival Almanac</div><a class="field-link" href="/getting-started/first-day-guide"><b>First Day Guide</b></a><a class="field-link" href="/exploration/prospecting"><b>Prospecting</b></a><a class="field-link" href="/smithing/steel-production"><b>Steel Production</b></a><a class="field-link" href="/farming/food-preservation"><b>Food Preservation</b></a><a class="field-link" href="/guides/survive-winter"><b>Survive Winter</b></a><a class="field-link" href="/mods/best-mods"><b>Best Mods</b></a><div class="season-card"><span>Season Note</span><p>${esc(tip)}</p></div>`;
+    if (!rightNav) return;
+    if (C.renderRightSidebar && !rightNav.innerHTML.trim()) rightNav.innerHTML = C.renderRightSidebar(D);
   }
   function progressStrip() {
     return `<div class="age-strip">${ageLabels.map((a, i) => `<div><span>${esc(a)}</span><b>${['flint', 'ore', 'alloy', 'bloom', 'cementation'][i]}</b></div>`).join('')}</div>`;
@@ -127,8 +137,7 @@
   }
   function navigate() {
     const r = route();
-    renderLeftNav(r);
-    renderRightNav();
+    renderChrome(r);
     const seg = r.split('/').filter(Boolean);
     if (r === '/') renderHome();
     else if (seg.length === 1 && category(seg[0])) renderCategory(seg[0]);
@@ -142,20 +151,22 @@
     const clean = path.replace(/\/$/, '') || '/';
     if (clean === route()) return;
     history.pushState({}, '', clean);
-    leftNav.classList.remove('open');
+    if (leftNav) leftNav.classList.remove('open');
     navigate();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   const searchIndex = Array.isArray(D.searchIndex) ? D.searchIndex : [...D.categories.map((c) => ({ title: c.title, sub: 'Field Section', href: '/' + c.id, tags: c.summary })), ...D.pages.map((p) => ({ title: p.title, sub: category(p.category).title, href: '/' + p.category + '/' + p.id, tags: p.keyInfo.join(' ') })), ...Object.entries(D.infoPages).map(([k, p]) => ({ title: p.title, sub: 'Camp Record', href: '/' + k, tags: p.body }))];
   function runSearch(q) {
+    if (!searchResults) return;
     if (!q) { searchResults.classList.remove('open'); return; }
     const low = q.toLowerCase();
     const matches = searchIndex.filter((x) => (x.title + ' ' + x.sub + ' ' + x.tags).toLowerCase().includes(low)).slice(0, 12);
     searchResults.innerHTML = matches.length ? matches.map((m) => `<a href="${esc(m.href)}">${esc(m.title)}<span>${esc(m.sub)}</span></a>`).join('') : '<div class="empty">No field notes match.</div>';
     searchResults.classList.add('open');
   }
-  searchInput.addEventListener('input', () => runSearch(searchInput.value.trim()));
-  searchInput.addEventListener('focus', () => runSearch(searchInput.value.trim()));
+  renderChrome(route());
+  if (searchInput) searchInput.addEventListener('input', () => runSearch(searchInput.value.trim()));
+  if (searchInput) searchInput.addEventListener('focus', () => runSearch(searchInput.value.trim()));
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href]');
     if (!a) { if (!e.target.closest('.search')) searchResults.classList.remove('open'); return; }
@@ -164,21 +175,21 @@
     const url = new URL(href, location.origin);
     if (url.origin !== location.origin) return;
     if (!window.__GW_PRERENDER__) {
-      searchInput.value = '';
-      searchResults.classList.remove('open');
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.classList.remove('open');
       return;
     }
     e.preventDefault();
-    searchInput.value = '';
-    searchResults.classList.remove('open');
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.classList.remove('open');
     go(url.pathname);
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); }
-    if (e.key === 'Escape') searchResults.classList.remove('open');
+    if (searchInput && e.key === '/' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); }
+    if (searchResults && e.key === 'Escape') searchResults.classList.remove('open');
   });
   window.addEventListener('popstate', () => { if (window.__GW_PRERENDER__) navigate(); });
-  if (menuToggle) menuToggle.onclick = () => leftNav.classList.toggle('open');
+  if (menuToggle && leftNav) menuToggle.onclick = () => leftNav.classList.toggle('open');
   if (window.__GW_PRERENDER__) {
     navigate();
   } else {

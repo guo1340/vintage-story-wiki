@@ -122,6 +122,10 @@ nav.top a {
   border: 1px solid transparent;
 }
 nav.top a:hover { color: var(--ash); border-color: rgba(225,210,174,.18); background: rgba(225,210,174,.06); text-decoration: none; }
+nav.top a.network-link {
+  color: var(--paper);
+  border-color: rgba(184,115,51,.34);
+}
 .menu-toggle {
   display: none;
   border: 1px solid rgba(225,210,174,.25);

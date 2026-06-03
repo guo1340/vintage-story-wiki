@@ -27,7 +27,7 @@ function mkEl() {
 }
 
 const els = {};
-['main', 'leftNav', 'rightNav', 'searchInput', 'searchResults', 'menuToggle'].forEach((id) => { els[id] = mkEl(); });
+['siteHeader', 'siteFooter', 'main', 'leftNav', 'rightNav', 'searchInput', 'searchResults', 'menuToggle'].forEach((id) => { els[id] = mkEl(); });
 const headEl = mkEl();
 global.document = {
   getElementById: (id) => els[id] || null,
@@ -50,6 +50,9 @@ require('./js/data.js');
 global.window.WikiData = window.WikiData;
 require('./js/meta.js');
 global.window.WikiMeta = window.WikiMeta;
+require('./js/components/header.js');
+require('./js/components/sidebar.js');
+require('./js/components/footer.js');
 const D = window.WikiData;
 const M = window.WikiMeta;
 const APP = require.resolve('./js/app.js');
@@ -64,6 +67,8 @@ function renderMain(route) {
   CURRENT = route;
   delete require.cache[APP];
   els.main._html = '';
+  els.siteHeader._html = '';
+  els.siteFooter._html = '';
   els.leftNav._html = '';
   els.rightNav._html = '';
   require('./js/app.js');
@@ -94,8 +99,6 @@ function buildPage(template, route) {
   html = html.replace(/<!-- vsw:head -->[\s\S]*?<!-- \/vsw:head -->/, '<!-- vsw:head -->\n' + headBlock(route) + '\n    <!-- /vsw:head -->');
   html = html.replace(/<script type="application\/ld\+json" id="vsw-jsonld">[\s\S]*?<\/script>/, '<script type="application/ld+json" id="vsw-jsonld">' + JSON.stringify(M.jsonLdFor(route)) + '</script>');
   const mainHtml = renderMain(route);
-  html = html.replace(/<aside class="left" id="leftNav">[\s\S]*?<\/aside>/, '<aside class="left" id="leftNav">' + els.leftNav._html + '</aside>');
-  html = html.replace(/<aside class="right" id="rightNav">[\s\S]*?<\/aside>/, '<aside class="right" id="rightNav">' + els.rightNav._html + '</aside>');
   html = html.replace(/<main id="main">[\s\S]*?<\/main>/, '<main id="main">' + mainHtml + '</main>');
   return html;
 }
