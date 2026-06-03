@@ -450,7 +450,10 @@ aside li a:hover, aside li a.active {
 .page .breadcrumb a { color: var(--paper); }
 .lead { color: #46331f; font-size: 17px; max-width: 76ch; }
 .page .lead { color: var(--paper); }
-.article p, .article li, .legal-page p, .legal-page li { max-width: 78ch; }
+.article p, .article li, .ledger-section p, .ledger-section li, .legal-page p, .legal-page li {
+  max-width: 78ch;
+  line-height: 1.58;
+}
 .ledger-section a, .category-ledger a, .legal-page a {
   color: #17344a;
   font-weight: 800;
@@ -488,20 +491,26 @@ aside li a:hover, aside li a.active {
 .toolrack dl { display: grid; grid-template-columns: 72px 1fr; gap: 8px 10px; margin: 0; }
 .toolrack dt { color: #6d4d31; font-weight: 900; }
 .toolrack dd { margin: 0; color: #2c2115; }
-.craft-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 8px; margin: 14px 0; }
-.craft-grid span, .craft-grid div {
-  min-height: 54px;
+.craft-grid {
   display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+.craft-grid span, .craft-grid div {
+  display: block;
+  min-height: 0;
+  text-align: left;
+  padding: 10px 12px;
   background: rgba(70,48,29,.11);
   border: 1px solid rgba(70,48,29,.2);
   color: #372617;
-  font-weight: 800;
+  font-weight: 750;
+  line-height: 1.38;
 }
 .craft-grid i {
   display: block;
+  margin-bottom: 4px;
   color: #7a5b38;
   font-style: normal;
   font-size: 11px;
