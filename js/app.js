@@ -3,6 +3,7 @@
   const C = window.WikiComponents || {};
   const siteHeader = document.getElementById('siteHeader');
   const siteFooter = document.getElementById('siteFooter');
+  const loadingStatus = document.getElementById('loadingStatus');
   const main = document.getElementById('main');
   const leftNav = document.getElementById('leftNav');
   const rightNav = document.getElementById('rightNav');
@@ -99,6 +100,17 @@
     menuToggle = document.getElementById('menuToggle');
     renderLeftNav(active);
     renderRightNav();
+    if (document.body) document.body.classList.add('chrome-ready');
+    if (loadingStatus) loadingStatus.textContent = 'Navigation mounted. Opening field notes...';
+  }
+  function revealPage() {
+    const finish = () => {
+      if (!document.body) return;
+      document.body.classList.add('app-ready');
+      setTimeout(() => document.body.classList.remove('is-loading'), 280);
+    };
+    if (window.requestAnimationFrame) window.requestAnimationFrame(finish);
+    else finish();
   }
   function renderLeftNav(active) {
     if (!leftNav) return;
@@ -169,7 +181,7 @@
   if (searchInput) searchInput.addEventListener('focus', () => runSearch(searchInput.value.trim()));
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href]');
-    if (!a) { if (!e.target.closest('.search')) searchResults.classList.remove('open'); return; }
+    if (!a) { if (searchResults && !e.target.closest('.search')) searchResults.classList.remove('open'); return; }
     const href = a.getAttribute('href');
     if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#')) return;
     const url = new URL(href, location.origin);
@@ -195,4 +207,5 @@
   } else {
     setTimeout(loadAds, 100);
   }
+  revealPage();
 })();
